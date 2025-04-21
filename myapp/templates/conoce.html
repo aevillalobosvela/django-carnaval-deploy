@@ -1,0 +1,110 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+
+<i id="modalConBtn" class="text-center p-2 boton-ayuda fa fa-question fa-2x"></i>
+
+<div class="modal fade mt-5" id="modalCon" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalConLabel">Conoce mas</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-unstyled">
+                    <li>¡Bienvenido a conocer mas!</li><br>
+                    <li>Aqui tienes mas informacion de sitios especificos</li><br>
+                    <li>Aqui puedes realizar lo siguiente:
+                        <ul>
+                            <li>Navegar entre hoteles, museos, iglesias, etc. 🏛 </li>
+                            <li>Buscar sitios especificos de acuerdo a los que necesites 🔎</li>
+                            <li>Aprender de sitios importantes de la ciudad 🔭</li>
+                        </ul>
+                    </li><br>
+                    <li>Diseñado para mejorar tu experiencia</li>
+                </ul>
+            </div>
+            <div class="modal-footer align-items-center" style="justify-content: flex-start !important;">
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" value="" id="noMostrarCheckCon">
+                    <label class="form-check-label" for="noMostrarCheckCon">
+                        No mostrar de nuevo
+                    </label>
+                </div>
+                <div class="ms-auto"><button type="button" id="cerrarmodalConBtn" class="btn btn-dark"
+                        data-bs-dismiss="modal">Aceptar</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="height: 76px !important;">
+</div>
+
+<div class="container-fluid fondo_opciones">
+  <div style="height: 100%;" class="controls p-2">
+    <div class="text-center mb-2">
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-12 col-md-3 d-flex mb-1">
+          <a class="btn btn-lg btn-success text-center align-items-center select_conoce">
+            <i class="fa fa-bed mx-2"></i>
+            <div style="width: 100%; font-size: 15px !important;">
+              <select class="form-select" name="select-hoteles" id="select-hoteles">
+                <option></option>
+              </select>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-12 col-md-3 d-flex mb-1">
+          <a class="btn btn-lg btn-danger text-center align-items-center select_conoce">
+            <i class="fa fa-cutlery mx-1"></i>
+            <div style="width: 100%; font-size: 15px !important;">
+              <select class="form-select mx-1" name="select-restaurantes" id="select-restaurantes">
+                <option></option>
+              </select>
+            </div>
+
+          </a>
+        </div>
+
+        <div class="col-12 col-md-3 d-flex mb-1">
+          <a class="btn btn-lg btn-warning text-center align-items-center select_conoce">
+            <i class="fa fa-university mx-1"></i>
+            <div style="width: 100%; font-size: 15px !important;">
+              <select class="form-select mx-1" name="select-museos" id="select-museos">
+                <option></option>
+              </select>
+            </div>
+
+          </a>
+        </div>
+
+        <div class="col-12 col-md-3 d-flex mb-1">
+          <a class="btn btn-lg btn-primary text-center align-items-center select_conoce">
+            <i class="fa fa-church mx-1"></i>
+            <div style="width: 100%; font-size: 15px !important;">
+              <select class="form-select mx-1" name="select-iglesias" id="select-iglesias">
+                <option></option>
+              </select>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper" style="height: 70%;">
+  <div id="content">
+    <div style="height: 100%;  z-index: 1;" id="map2"></div>
+  </div>
+</div>
+
+<script src="{% static '/js/funciones_con.js' %}"></script>
+
+{% endblock %}
+
+

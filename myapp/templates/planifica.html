@@ -1,0 +1,237 @@
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+
+<div class="aviso-posicion" id="aviso-posicion">
+    <div class="card">
+        <div class="card-body text-center" >
+            <h5 class="card-title">¿Donde te encuentras?</h5>
+            <p class="card-text">Haz click en el mapa</p>
+            <button id="cancelarposicion" class="btn btn-dark btn-sm" type="button">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<i id="modalPlanBtn" class="text-center p-2 boton-ayuda fa fa-question fa-2x"></i>
+
+<i id="posicionBtn" class="text-center p-2 boton-posicion fa fa-map-marker fa-2x"
+    title="Haz clic para establecer tu posicion" onclick="escogerposicion"></i>
+
+<div class="modal fade mt-5" id="modalPlan" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalPlanLabel">Planificando tu dia</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-unstyled">
+                    <li>¡Bienvenido a la pestaña de Planificacion de tu dia!</li><br>
+                    <li>Si buscas tener un plan para explorar la ciudad, comer y conocer mas. Atencion</li><br>
+                    <li>Aqui puedes realizar lo siguiente:
+                        <ul>
+                            <li>Planificar tu visita por la ciudad 👓 </li>
+                            <li>Añadir hoteles, restaurantes, etc. a una lista personalizada para generar una ruta adecuada para ti 🎡</li>
+                            <li>Seleccionar el tipo de ruta que prefieras 🚗</li>
+                        </ul>
+                    </li><br>
+                    <li>Diseñado para mejorar tu experiencia</li>
+                </ul>
+            </div>
+            <div class="modal-footer align-items-center" style="justify-content: flex-start !important;">
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" value="" id="noMostrarCheckPlan">
+                    <label class="form-check-label" for="noMostrarCheckPlan">
+                        No mostrar de nuevo
+                    </label>
+                </div>
+                <div class="ms-auto"><button type="button" id="cerrarmodalPlanBtn" class="btn btn-dark"
+                        data-bs-dismiss="modal">Aceptar</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="height: 76px !important;">
+</div>
+
+<div class="container-fluid fondo_opciones">
+    <div class="row p-3">
+        <div class="col-4 col-md-2">
+            <div class="" >
+                <button type="button" class="btn btn-light text-center mx-auto boton-plan fondorojo"
+                    onclick="mostrarElemento('hotelSelect','foodSelect','tourismSelect')">
+                    Alojamiento</button>
+                <button type="button" class="btn btn-light text-center mx-auto boton-plan fondoamarillo"
+                    onclick="mostrarElemento('foodSelect','hotelSelect','tourismSelect')">
+                    Comida</button>
+                <button type="button" class="btn btn-light text-center mx-auto boton-plan fondoverde"
+                    onclick="mostrarElemento('tourismSelect','foodSelect','hotelSelect')">
+                    Turismo</button>
+            </div>
+        </div>
+        <div class="col-8 col-md-4 justify-content-center align-items-center">
+            <div class="row mt-3">
+                <div>
+                    <select class="form-select" id="hotelSelect" style="display: none;">
+                    </select>
+                </div>
+                <div>
+                    <select class="form-select " id="foodSelect" style="display: none;">
+                    </select>
+                </div>
+                <div>
+                    <select class="form-select " id="tourismSelect" style="display: none;">
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 my-2 " style="display: none;" id="anadir_parada">
+                    <button type="button" class="btn btn-success text-center mx-auto" onclick="anadirparada()">
+                        Añadir parada</button>
+                </div>
+                <div class="col-6 my-2 " style="display: none;" id="eliminar_parada">
+                    <button type="button" class="btn btn-danger text-center mx-auto" onclick="vaciarparada()">
+                        Vaciar paradas</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 col-md-4">
+            <div class="input-group">
+                <textarea id="paradas_lista" class="form-control" disabled="true"
+                    style="height: 120px; overflow-y: auto; resize: none;"></textarea>
+            </div>
+        </div>
+
+        <div class="col-4 col-md-2">
+            <div class="text-center">
+                <h4>Generar Ruta</h4>
+            </div>
+            <div>
+                <button type="button" class="btn btn-light text-center mx-auto boton-plan fondorojo"
+                    id="generateRoutePie">
+                    Pie</button>
+            </div>
+            <div> <button type="button" class="btn btn-light text-center mx-auto boton-plan fondoamarillo"
+                    id="generateRoute">
+                    Vehiculo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper" style="height: 70%;">
+    <div id="content">
+        <div style="height: 100%;  z-index: 1;" id="map"></div>
+    </div>
+</div>
+
+
+<div class="container-fluid" style="background-color: #2b2b2b;">
+    <div class="row">
+        <div class="col-12 col-md-12 mb-3 text-center">
+            <div id="recommendation" class="text-center my-4 mx-2">
+                <div class="card mx-auto" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">¿Quieres saber como llegar a algun lugar?</h5>
+                        <h6 class="card-subtitle m-2 text-muted">Genera una ruta sugerida</h6>
+                        <p class="card-text">¿Donde quedarme?</p>
+                        <p class="card-text">¿Donde comer?</p>
+                        <p class="card-text">¿Donde ir?</p>
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-lg btn-warning" onclick="generateRandomRoute()" href="#">
+                Quiero recibir una recomendacion</a>
+        </div>
+        <!-- 
+        <div class="col-12 col-md-4">
+            <div class="container text-center">
+                {% if usuario %}
+                <form method="post">
+                    {% csrf_token %}
+                    <h3 class="mt-3" style="color: white;">Califica el Servicio</h3>
+                    <div class="rating">
+                        <input required type="radio" id="star5_need" name="rating_need" value="5" {% if form.initial.rating_need == 5 %} checked {% endif %} />
+                        <label class="star" for="star5_need">★</label>
+                        <input type="radio" id="star4_need" name="rating_need" value="4" {% if form.initial.rating_need == 4 %} checked {% endif %} />
+                        <label class="star" for="star4_need">★</label>
+                        <input type="radio" id="star3_need" name="rating_need" value="3" {% if form.initial.rating_need == 3 %} checked {% endif %} />
+                        <label class="star" for="star3_need">★</label>
+                        <input type="radio" id="star2_need" name="rating_need" value="2" {% if form.initial.rating_need == 2 %} checked {% endif %} />
+                        <label class="star" for="star2_need">★</label>
+                        <input type="radio" id="star1_need" name="rating_need" value="1" {% if form.initial.rating_need == 1 %} checked {% endif %} />
+                        <label class="star" for="star1_need">★</label>
+                    </div>
+                    <h5 style="color: white;">Necesidades suplidas</h5>
+                    <div class="rating">
+                        <input required type="radio" id="star5_situation" name="rating_situation" value="5" {% if form.initial.rating_situation == 5 %} checked {% endif %} />
+                        <label class="star" for="star5_situation">★</label>
+                        <input type="radio" id="star4_situation" name="rating_situation" value="4" {% if form.initial.rating_situation == 4 %} checked {% endif %} />
+                        <label class="star" for="star4_situation">★</label>
+                        <input type="radio" id="star3_situation" name="rating_situation" value="3" {% if form.initial.rating_situation == 3 %} checked {% endif %} />
+                        <label class="star" for="star3_situation">★</label>
+                        <input type="radio" id="star2_situation" name="rating_situation" value="2" {% if form.initial.rating_situation == 2 %} checked {% endif %} />
+                        <label class="star" for="star2_situation">★</label>
+                        <input type="radio" id="star1_situation" name="rating_situation" value="1" {% if form.initial.rating_situation == 1 %} checked {% endif %} />
+                        <label class="star" for="star1_situation">★</label>
+                    </div>
+                    <h5 style="color: white;">Situación favorable</h5>
+                    <div class="rating">
+                        <input required type="radio" id="star5_experience" name="rating_experience" value="5" {% if form.initial.rating_experience == 5 %} checked {% endif %} />
+                        <label class="star" for="star5_experience">★</label>
+                        <input type="radio" id="star4_experience" name="rating_experience" value="4" {% if form.initial.rating_experience == 4 %} checked {% endif %} />
+                        <label class="star" for="star4_experience">★</label>
+                        <input type="radio" id="star3_experience" name="rating_experience" value="3" {% if form.initial.rating_experience == 3 %} checked {% endif %} />
+                        <label class="star" for="star3_experience">★</label>
+                        <input type="radio" id="star2_experience" name="rating_experience" value="2" {% if form.initial.rating_experience == 2 %} checked {% endif %} />
+                        <label class="star" for="star2_experience">★</label>
+                        <input type="radio" id="star1_experience" name="rating_experience" value="1" {% if form.initial.rating_experience == 1 %} checked {% endif %} />
+                        <label class="star" for="star1_experience">★</label>
+                    </div>
+                    <h5 style="color: white;">Experiencia personal</h5>
+                    <div class="rating">
+                        <input required type="radio" id="star5_satisfaction" name="rating_satisfaction" value="5" {% if form.initial.rating_satisfaction == 5 %} checked {% endif %} />
+                        <label class="star" for="star5_satisfaction">★</label>
+                        <input type="radio" id="star4_satisfaction" name="rating_satisfaction" value="4" {% if form.initial.rating_satisfaction == 4 %} checked {% endif %} />
+                        <label class="star" for="star4_satisfaction">★</label>
+                        <input type="radio" id="star3_satisfaction" name="rating_satisfaction" value="3" {% if form.initial.rating_satisfaction == 3 %} checked {% endif %} />
+                        <label class="star" for="star3_satisfaction">★</label>
+                        <input type="radio" id="star2_satisfaction" name="rating_satisfaction" value="2" {% if form.initial.rating_satisfaction == 2 %} checked {% endif %} />
+                        <label class="star" for="star2_satisfaction">★</label>
+                        <input type="radio" id="star1_satisfaction" name="rating_satisfaction" value="1" {% if form.initial.rating_satisfaction == 1 %} checked {% endif %} />
+                        <label class="star" for="star1_satisfaction">★</label>
+                    </div>
+                    <h5 style="color: white;">Satisfacción general</h5>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-info mt-4 btn-custom-save">Guardar Calificación</button>
+                    </div>
+                </form>
+                {% endif %}
+            </div>
+            <div class="modal fade" id="thankYouModal" tabindex="-1" role="dialog" aria-labelledby="thankYouModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="thankYouModalLabel">Gracias</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ¡Muchas gracias por tu calificación!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         -->
+    </div>
+</div>
+
+<script src="{% static '/js/funciones_plan.js' %}"></script>
+{% endblock %}

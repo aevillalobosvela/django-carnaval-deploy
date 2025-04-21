@@ -1,0 +1,84 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<i id="modalMarBtn" class="text-center p-2 boton-ayuda fa fa-question fa-2x"></i>
+
+<div class="modal fade mt-5" id="modalMar" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalMarLabel">Mis Marcadores</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-unstyled">
+                    <li>¡Bienvenido a la pestaña mis marcadores!</li><br>
+                    <li>Si encuentras algun lugar interesante en la ciudad puedes guardarlo aca</li><br>
+                    <li>Aqui puedes realizar lo siguiente:
+                        <ul>
+                            <li>Definir puntos en el mapa con un click para guardarlos 🗺️ </li>
+                            <li>Agregar un nombre y descripcion a los puntos generados 🚩</li>
+                            <li>Tus puntos son tuyos unicamente 👤</li>
+                            <li>Eliminar puntos antiguos facilmente ❌</li>
+                        </ul>
+                    </li><br>
+                    <li>Para registrar tu estadia</li>
+                </ul>
+            </div>
+            <div class="modal-footer align-items-center" style="justify-content: flex-start !important;">
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" value="" id="noMostrarCheckMar">
+                    <label class="form-check-label" for="noMostrarCheckMar">
+                        No mostrar de nuevo
+                    </label>
+                </div>
+                <div class="ms-auto"><button type="button" id="cerrarmodalMarBtn" class="btn btn-dark"
+                        data-bs-dismiss="modal">Aceptar</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="height: 76px !important;">
+</div>
+
+<div class="container-fluid p-4 fondo_opciones">
+  <form method="post">
+    {% csrf_token %} {% if error %}
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endif %}
+    <div class="row">
+      <div class="col-12 col-md-6 mb-2">
+        <input type="text" class="form-control" id="mi_nombre" name="nombre"
+          placeholder="Ingresa el nombre del punto..." required />
+
+        <div class="row mt-2">
+          <div class="col-6">
+            <input type="text" class="form-control" id="mi_id_coord_lat" name="coord_lat" placeholder="Latitud" required
+              readonly />
+          </div>
+          <div class="col-6">
+            <input type="text" class="form-control" id="mi_id_coord_lng" name="coord_lng" placeholder="Longitud"
+              required readonly />
+          </div>
+        </div>
+
+      </div>
+      <div class="col-8 col-md-4">
+        <textarea type="text" class="form-control" id="mi_descripcion" name="descripcion" rows="3"
+          placeholder="Escribe una descripcion del punto..." required></textarea>
+      </div>
+      <div class="col-4 col-md-2">
+        <button class="btn btn-dark w-100 h-100"  type="submit">Guardar Lugar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="wrapper" style="height: 70%">
+  <div id="content">
+    <div style="height: 100%;  z-index: 1;" id="map3"></div>
+  </div>
+</div>
+
+<script src="{% static '/js/funciones_marcadores.js' %}"></script>
+{% endblock %}

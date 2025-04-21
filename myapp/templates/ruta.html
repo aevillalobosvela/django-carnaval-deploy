@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+
+<div class="aviso-posicion" id="aviso-posicion">
+    <div class="card">
+        <div class="card-body text-center" >
+            <h5 class="card-title">¿Donde te encuentras?</h5>
+            <p class="card-text">Haz click en el mapa</p>
+            <button id="cancelarposicion" class="btn btn-dark btn-sm" type="button">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<i id="modalRutaBtn" class="text-center p-2 boton-ayuda fa fa-question fa-2x"></i>
+
+<i id="posicionBtn" class="text-center p-2 boton-posicion fa fa-map-marker fa-2x"
+    title="Haz clic para establecer tu posicion" onclick="escogerposicion"></i>
+
+<div class="modal fade mt-5" id="modalRuta" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalRutaLabel">Ruta del Carnaval de Oruro</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-unstyled">
+                    <li>¡Bienvenido a la pestaña de ruta oficial!</li><br>
+                    <li>Aqui puedes realizar lo siguiente:
+                        <ul>
+                            <li>Explorar y seguir la ruta de la entrada 🗺️ </li>
+                            <li>Visualizar puestos de salud, depositos residuales, etc. 📍</li>
+                            <li>Haz clic sobre cualquier ícono para ver más información 👉</li>
+                            <li>Tambien puedes generar rutas con tu ubicacion actual 🌐</li>
+                        </ul>
+                    </li><br>
+                    <li>Si quieres tener todo ubicado este es tu lugar</li>
+                </ul>
+            </div>
+            <div class="modal-footer align-items-center" style="justify-content: flex-start !important;">
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" value="" id="noMostrarCheckRuta">
+                    <label class="form-check-label" for="noMostrarCheckRuta">
+                        No mostrar de nuevo
+                    </label>
+                </div>
+                <div class="ms-auto"><button type="button" id="cerrarmodalRutaBtn" class="btn btn-dark"
+                        data-bs-dismiss="modal">Aceptar</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div id="content">
+        <div style="height: 100%;  z-index: 1;" id="map1"></div>
+    </div>
+</div>
+
+<script src="{% static '/js/funciones_ruta.js' %}"></script>
+{% endblock %}

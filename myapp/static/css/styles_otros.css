@@ -1,0 +1,146 @@
+.fondo_opciones {
+  background-image: url("../img/fondos/fondo2.png");
+  background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat;
+}
+
+.select_conoce {
+  width: 100%;
+  height: 50px;
+  display: flex !important;
+}
+
+.leaflet-popup-content img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.leaflet-popup-content h3 {
+  margin-top: 0;
+}
+
+.leaflet-popup-content p {
+  margin: 0;
+}
+
+.social-icons {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-icons a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #300c2a;
+  padding: 20px;
+  font: condensed 120% sans-serif;
+  color: white;
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 70px;
+  text-align: center;
+}
+
+.banner img {
+  max-width: 100px;
+  height: auto;
+}
+
+.select-custom {
+  background-color: #380f36;
+  font: condensed 88% sans-serif;
+  color: white;
+  width: 100%;
+  height: 65px;
+  font-size: 18px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.banner2 {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.banner2 img {
+  width: 100%;
+  display: block;
+}
+
+.tarjeta-hotel-g {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  height: 570px;
+}
+
+.tarjeta-hotel-m {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  height: 370px;
+}
+
+.tarjeta-hotel h3 {
+  margin-top: 0;
+  color: rgb(255, 255, 255);
+}
+
+.tarjeta-hotel p {
+  margin-bottom: 10px;
+  color: rgb(206, 204, 204);
+}
+
+.rating {
+  display: inline-block;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.rating input:checked ~ label {
+  color: gold;
+}
+
+.hero {
+  background-image: url("../img/informacion/oruro2.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}

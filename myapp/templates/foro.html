@@ -1,0 +1,112 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<i id="modalForoBtn" class="text-center p-2 boton-ayuda fa fa-question fa-2x"></i>
+
+<div class="modal fade mt-5" id="modalForo" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalForoLabel">Foro de Opinion</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-unstyled">
+          <li>¡Bienvenido al Foro de opinion!</li><br>
+          <li>Por si necesitas alguna opinion antes de visitar algun lugar</li><br>
+          <li>Aqui puedes realizar lo siguiente:
+            <ul>
+              <li>Comentar y calificar sitios de la ciudad ⭐ </li>
+              <li>Revisar un resumen de calificaciones de otros usuarios de lugares especificos 🎭</li>
+              <li>Compartir comentarios de otras personas 👤</li>
+            </ul>
+          </li><br>
+          <li>Para mejorar tu experiencia</li>
+        </ul>
+      </div>
+      <div class="modal-footer align-items-center" style="justify-content: flex-start !important;">
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="checkbox" value="" id="noMostrarCheckForo">
+          <label class="form-check-label" for="noMostrarCheckForo">
+            No mostrar de nuevo
+          </label>
+        </div>
+        <div class="ms-auto"><button type="button" id="cerrarmodalForoBtn" class="btn btn-dark"
+            data-bs-dismiss="modal">Aceptar</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="height: 76px !important;">
+</div>
+
+<div class="wrapper" style="height: 70%">
+  <div id="content">
+    <div style="height: 100%;  z-index: 1;" id="map5"></div>
+  </div>
+</div>
+
+<!-- Panel colapsable desde abajo -->
+<div class="collapse position-fixed bottom-0 start-0 w-100 info-panel" id="infoPanel">
+  <div>
+    <button class="btn btn-dark btn-barra position-fixed p-0" style="z-index: 10;" type="button"
+      data-bs-toggle="collapse" data-bs-target="#infoPanel">
+      <i class="fa fa-arrow-down mx-1"></i>
+    </button>
+  </div>
+  <div class="bg-light p-3 shadow-lg border-top fondo_opciones">
+    <div class="row mt-3">
+      <div class="col-md-6 col-12">
+        <div id="location-card-container">
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="mt-2" id="formulario" style="display: none">
+          <form method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-7 pe-0">
+                <textarea type="text" class="form-control" id="comment-input" name="comentario_user"
+                  style="height: 100%; overflow-y: auto;" placeholder="Escribe un comentario y califica el lugar..."
+                  required></textarea>
+              </div>
+              <div class="col-5 card p-2" style="opacity: 80%;">
+                <div class="rating text-center">
+                  <input required type="radio" id="star5_rating" name="rating" value="5" />
+                  <label class="star" for="star5_rating">★</label>
+                  <input type="radio" id="star4_rating" name="rating" value="4" />
+                  <label class="star" for="star4_rating">★</label>
+                  <input type="radio" id="star3_rating" name="rating" value="3" />
+                  <label class="star" for="star3_rating">★</label>
+                  <input type="radio" id="star2_rating" name="rating" value="2" />
+                  <label class="star" for="star2_rating">★</label>
+                  <input type="radio" id="star1_rating" name="rating" value="1" />
+                  <label class="star" for="star1_rating">★</label>
+                </div>
+                <button type="submit" class="btn btn-dark btn-sm fondoamarillo" id="submit-comment">
+                  Comentar
+                </button>
+              </div>
+            </div>
+            <div class="text-right" style="position: fixed; z-index:-1">
+              <input style="width: 10px;" type="text" class="form-control" id="id_punto" name="id_punto" />
+            </div>
+          </form>
+        </div>
+        <div class="mt-1" style="height: 170px; overflow-y: auto;">
+          <ul class="list-group" id="lista_comentarios">
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button class="botonfijo btn btn-dark btn-barra" style="z-index: 10; display:none" type="button"
+  data-bs-toggle="collapse" data-bs-target="#infoPanel" id="btn_desplegar">
+  <i class="fa fa-arrow-up mx-1"></i>
+</button>
+<script src="{% static '/js/funciones_foro.js' %}"></script>
+
+
+{% endblock %}
