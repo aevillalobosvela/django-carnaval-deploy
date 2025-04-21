@@ -269,12 +269,12 @@ def registro(request):
                 user.save()
                 print("Usuario registrado")
                 return redirect("login_user")
-            except IntegrityError:
+            """ except IntegrityError:
                 return render(
                     request,
                     "registro.html",
                     {"form": UserCreationForm, "error": "Usuario ya registrado"},
-                )
+                ) """
             except ValueError:
                 return render(
                     request,
