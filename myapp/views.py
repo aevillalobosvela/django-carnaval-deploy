@@ -78,7 +78,7 @@ def login_user(request):
                 },
             )
         else:
-            if user.is_superuser is 'true':
+            if user.is_superuser == 'true':
                 print("Ingresa admin")
                 login(request, user)
                 return redirect("usuarios_admin")
