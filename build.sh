@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
-# Exit on error
 set -o errexit
 
-# Modify this line as needed for your package manager (pip, poetry, etc.)
+echo "Iniciando proceso de build..."
+
+# pip install -r requirements.txt
+echo "Instalando dependencias..."
 # pip install -r requirements.txt
 
-# Convert static asset files
+echo "Recolectando archivos estáticos..."
 python manage.py collectstatic --no-input
 
-# Apply any outstanding database migrations
+echo "Aplicando migraciones..."
 python manage.py migrate
+
+echo "Build finalizado correctamente."
