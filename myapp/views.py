@@ -260,7 +260,7 @@ def registro(request):
         print(request.POST)
 
         if request.POST["password1"] == request.POST["password2"]:
-           
+            try:
                 user = User.objects.create_user(
                     username=request.POST["user"],
                     password=request.POST["password1"],
@@ -269,7 +269,24 @@ def registro(request):
                 user.save()
                 print("Usuario registrado")
                 return redirect("login_user")
-           
+            except IntegrityError:
+                return render(
+                    request,
+                    "registro.html",
+                    {"form": UserCreationForm, "error": "Usuario ya registrado"},
+                )
+            except ValueError:
+                return render(
+                    request,
+                    "registro.html",
+                    {"form": UserCreationForm, "error": "Datos no validos"},
+                )
+            except:
+                return render(
+                    request,
+                    "registro.html",
+                    {"form": UserCreationForm, "error": "Error en el registro"},
+                )
 
         return render(
             request,
