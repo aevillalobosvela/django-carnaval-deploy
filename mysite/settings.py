@@ -91,10 +91,10 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 } """
 
 DATABASES = {
-   'default': dj_database_url.config(
-       default='postgresql://admin:7AoCUB0XzAa1k6ms7VMtWy9HRRHWPqou@dpg-d02t31juibrs73b73mjg-a.oregon-postgres.render.com/dbcarnaval',
-       conn_max_age=600
-   )
+    'default': dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),  # Render ya la tiene definida
+        conn_max_age=600
+    )
 }
 
 # Password validation
