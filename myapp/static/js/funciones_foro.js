@@ -6,12 +6,17 @@ var map5 = L.map("map5", {
   minZoom: 14,
 });
 
-// Agregar tile layer mapa base desde openstreetmap
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution:
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map5);
-// Definir ubicaciones con detalles adicionales
+L.tileLayer(
+  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+).addTo(map5);
+
+var osmLayer = new L.TileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }
+);
 
 document.addEventListener("DOMContentLoaded", function () {
 
