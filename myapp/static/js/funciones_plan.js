@@ -169,7 +169,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function anadirparada() {
   if (arreglo_lugares.length > 3) {
-    alert("Maximo de paradas alcanzado")
+    Swal.fire({
+      icon: 'warning',
+      title: 'Máximo de paradas alcanzado',
+      text: 'Has alcanzado el límite de paradas permitidas.',
+      confirmButtonText: 'Aceptar'
+    });
   } else {
     const textarea = document.getElementById("paradas_lista");
     selecthoteles = document.getElementById("hotelSelect");
@@ -288,7 +293,12 @@ document.getElementById("generateRoute").addEventListener("click", function () {
   });
 
   if (waypoints.length < 2) {
-    alert("Paradas no seleccionadas");
+    Swal.fire({
+      icon: 'error',
+      title: 'Paradas no seleccionadas',
+      text: 'Por favor, selecciona al menos una parada.',
+      confirmButtonText: 'Aceptar'
+    });
   } else {
     routeLayer = L.layerGroup(marcadores).addTo(map);
 
@@ -382,7 +392,12 @@ document.getElementById("generateRoutePie").addEventListener("click", function (
   });
 
   if (waypoints.length < 2) {
-    alert("Paradas no seleccionadas");
+    Swal.fire({
+      icon: 'error',
+      title: 'Paradas no seleccionadas',
+      text: 'Por favor, selecciona al menos una parada.',
+      confirmButtonText: 'Aceptar'
+    });
   } else {
     routeLayer = L.layerGroup(marcadores).addTo(map);
 

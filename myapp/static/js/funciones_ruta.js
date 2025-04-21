@@ -261,7 +261,12 @@ document.addEventListener("DOMContentLoaded", function () {
 function generateRoute() {
   map1.closePopup();
   if (!userLocation || !selectedDestination) {
-    alert("Usuario o destino no encontrados");
+    Swal.fire({
+      icon: 'error',
+      title: 'Usuario o destino no encontrados',
+      text: 'No se pudo encontrar el usuario o el destino. Verifica los datos ingresados.',
+      confirmButtonText: 'Aceptar'
+    });
     return;
   }
   if (routingControl) {

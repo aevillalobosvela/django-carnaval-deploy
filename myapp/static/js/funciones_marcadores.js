@@ -111,7 +111,12 @@ function eliminarMarcador(puntoId) {
     },
     success: function (response) {
       if (response.status === "success") {
-        alert("Punto eliminado con éxito.");
+        Swal.fire({
+          icon: 'success',
+          title: 'Punto eliminado con éxito',
+          confirmButtonText: 'Aceptar'
+        });
+
         location.reload();
       } else {
         alert("Hubo un error al eliminar el punto.");
