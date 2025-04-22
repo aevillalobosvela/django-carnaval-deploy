@@ -1,0 +1,53 @@
+
+  .titulo {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #4a148c;
+  }
+  
+  .contenedor-musica {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .cancion {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .cancion:hover {
+    transform: translateY(-5px);
+  }
+  
+  .cancion img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .cancion h3 {
+    margin: 10px 0;
+    color: #6a1b9a;
+    font-size: 1em;
+  }
+  
+  .cancion a {
+    display: inline-block;
+    background-color: #6a1b9a;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    font-size: 0.9em;
+  }
+  
+  .cancion a:hover {
+    background-color: #8e24aa;
+  }
