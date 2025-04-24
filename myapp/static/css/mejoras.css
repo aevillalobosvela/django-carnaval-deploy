@@ -4,13 +4,7 @@
     font-size: 2.5em;
     margin-bottom: 40px;
   }
-  
-  .contenedor-musica {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  
+    
   .cancion {
     background-color: white;
     border-radius: 15px;
