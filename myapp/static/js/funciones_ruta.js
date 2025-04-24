@@ -35,7 +35,7 @@ var usuarioIcon = L.divIcon({
 });
 
 function onLocationFound(e) {
-  userLocation = e.latlng;
+  userLocation = [-17.964138034171146, -67.10734251787665];
   usermarker = L.marker(e.latlng).addTo(map1).bindPopup("Usted esta aqui").openPopup();
   map1.setView(e.latlng, 15);
 }
