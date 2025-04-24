@@ -29,12 +29,12 @@ var osmLayer = new L.TileLayer(
 );
 
 function onLocationFound(e) {
-  userLocation = e.latlng;
-  usermarker = L.marker(e.latlng)
+  userLocation = [-17.964138034171146, -67.10734251787665];
+  usermarker = L.marker([-17.964138034171146, -67.10734251787665])
     .addTo(map)
     .bindPopup("Usted esta aqui")
     .openPopup();
-  map.setView(e.latlng, 15);
+  map.setView([-17.964138034171146, -67.10734251787665], 15);
 }
 
 function onLocationError(e) {
